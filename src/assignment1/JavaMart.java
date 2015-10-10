@@ -50,6 +50,7 @@ public class JavaMart {
        do{
           flag2=true;
           flag3 =true;
+        System.out.println("----------------------------");
         System.out.println("Hello, Welcome to JAVAMART");
         System.out.println("Enter 1: Manage employees ");
         System.out.println("Enter 2: Manage products");
@@ -63,6 +64,7 @@ public class JavaMart {
           case 1: 
             while(flag2) 
             {
+                System.out.println("----------------------------");
                 System.out.println("Hello, Welcome to Employee");
                 System.out.println("Enter 1: Add a new employee");
                 System.out.println("Enter 2: Search an existing employee");
@@ -74,6 +76,7 @@ public class JavaMart {
                          int age,year,day,month;
                          String fName,lName;
                          double hourlySalary,hour,allowance,bonus;
+                         System.out.println("----------------------------");
                          System.out.println("Which kind you want to choose");
                          System.out.println("Enter 1: Part Time Employee");
                          System.out.println("Enter 2: Seasonal Employee");
@@ -81,14 +84,13 @@ public class JavaMart {
                          tempInt = Integer.parseInt(myScan.nextLine());
                          switch(tempInt)
                          {                          
-                             case 1:          
-                                 // should add if >0 to check the user input 
+                             case 1:                                         
                                  System.out.println("Please input First Name");
                                  fName = myScan.nextLine();
                                  System.out.println("Please input Last Name");
                                  lName = myScan.nextLine();
                                  System.out.println("Please input Age");
-                                 age = Integer.parseInt(myScan.nextLine());
+                                 age = Integer.parseInt(myScan.nextLine());   
                                  System.out.println("Please input year month day separated by SPACE");                                 
                                  String[] arry = myScan.nextLine().split(" ");
                                  year = Integer.parseInt(arry[0]);
@@ -98,12 +100,16 @@ public class JavaMart {
                                  hour = Double.parseDouble(myScan.nextLine());
                                  System.out.println("Please input hourly salary");
                                  hourlySalary = Double.parseDouble(myScan.nextLine());
-                                 Employee ptEmp = new PartTimeEmp(fName,lName,age,year,month,day,hour,hourlySalary);                             
-                                 empList.add(ptEmp);
-                                 
+                                 if(validator(age,year,month,day,hour,hourlySalary))
+                                 {
+                                    Employee ptEmp = new PartTimeEmp(fName,lName,age,year,month,day,hour,hourlySalary);                             
+                                    empList.add(ptEmp);
+                                 }else
+                                 {
+                                    System.out.println("process failed because of invalid input"); 
+                                 }
                                  break;
-                             case 2:
-                                  // should add if >0 to check the user input 
+                             case 2:                              
                                  System.out.println("Please input First Name");
                                  fName = myScan.nextLine();
                                  System.out.println("Please input Last Name");
@@ -121,11 +127,17 @@ public class JavaMart {
                                  hourlySalary = Double.parseDouble(myScan.nextLine());
                                  System.out.println("Please input bonus");
                                  bonus = Double.parseDouble(myScan.nextLine());
-                                 Employee seasonEmp = new SeasonalEmp(fName,lName,age,year,month,day,hour,hourlySalary,bonus);
-                                 empList.add(seasonEmp);
+                                 if (validator(age,year,month,day,hour,hourlySalary,bonus)) 
+                                 {
+                                   Employee seasonEmp = new SeasonalEmp(fName,lName,age,year,month,day,hour,hourlySalary,bonus);
+                                   empList.add(seasonEmp);  
+                                 }
+                                 else{
+                                    System.out.println("process failed because of invalid input"); 
+                                 }
+                                 
                                  break;
-                             case 3:
-                                 // should add if >0 to check the user input 
+                             case 3:                           
                                  System.out.println("Please input First Name");
                                  fName = myScan.nextLine();
                                  System.out.println("Please input Last Name");
@@ -145,8 +157,15 @@ public class JavaMart {
                                  bonus = Double.parseDouble(myScan.nextLine());
                                  System.out.println("Please input allowance");
                                  allowance = Double.parseDouble(myScan.nextLine());
-                                 Employee ftEmp = new FullTimeEmp(fName,lName,age,year,month,day,hour,hourlySalary,bonus,allowance);
-                                 empList.add(ftEmp);
+                                 if (validator(age,year,month,day,hour,hourlySalary,bonus,allowance)) 
+                                 {
+                                     Employee ftEmp = new FullTimeEmp(fName,lName,age,year,month,day,hour,hourlySalary,bonus,allowance);
+                                     empList.add(ftEmp);
+                                 }else
+                                 {
+                                      System.out.println("process failed because of invalid input"); 
+                                 }
+                                 
                                  break;
                              default:
                                  System.out.println("You MUST input an valid number(1,2,3)");
@@ -187,6 +206,7 @@ public class JavaMart {
             case 2:
               while(flag3)
               {
+                System.out.println("----------------------------");
                 System.out.println("Hello, Welcome to Products");
                 System.out.println("Enter 1: Add a new Product");
                 System.out.println("Enter 2: Search an existing product");
@@ -268,6 +288,81 @@ public class JavaMart {
        }while(flag1);
        
     }
+//   validator(age,year,month,day,hour,hourlySalary);
+public static boolean validator(int age,int year,int month,int day,double hour,double hourlySalary){
+    boolean validator =true;
+    if(age<0||hour<0||hourlySalary<0)
+    {
+       validator = false;
+       System.out.println("Age,hour,hourly Salary cannot be nagetive");
+    }
 
+    if(year>2100||year<1900)
+    {
+         validator = false;
+         System.out.println("Must be a valid year");
+    }
+    if(month<0||month>12)
+    {
+        validator = false;
+         System.out.println("Must be a valid month");
+    }
+    if(day<0||day>31)
+    {
+        validator = false;
+         System.out.println("Must be a valid day");
+    }
+    return validator;
+}
 
+   public static boolean validator(int age,int year,int month,int day,double hour,double hourlySalary,double bonus){
+       boolean validator = true;
+        if(age<0||hour<0||hourlySalary<0||bonus<0)
+    {
+       validator = false;
+       System.out.println("Age,hour,hourly Salary,bonus cannot be nagetive");
+    }
+
+    if(year>2100||year<1900)
+    {
+         validator = false;
+         System.out.println("Must be a valid year");
+    }
+    if(month<0||month>12)
+    {
+        validator = false;
+         System.out.println("Must be a valid month");
+    }
+    if(day<0||day>31)
+    {
+        validator = false;
+         System.out.println("Must be a valid day");
+    }
+       return validator;
+   }
+   public static boolean validator(int age,int year,int month,int day,double hour,double hourlySalary,double bonus,double allowcance){
+       boolean validator = true;
+        if(age<0||hour<0||hourlySalary<0||bonus<0||allowcance<0)
+    {
+       validator = false;
+       System.out.println("Age,hour,hourly Salary,bonus cannot be nagetive");
+    }
+
+    if(year>2100||year<1900)
+    {
+         validator = false;
+         System.out.println("Must be a valid year");
+    }
+    if(month<0||month>12)
+    {
+        validator = false;
+         System.out.println("Must be a valid month");
+    }
+    if(day<0||day>31)
+    {
+        validator = false;
+         System.out.println("Must be a valid day");
+    }
+       return validator;
+   }
 }
