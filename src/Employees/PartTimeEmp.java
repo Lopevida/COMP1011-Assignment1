@@ -23,12 +23,12 @@ public class PartTimeEmp extends Employee{
     
      @Override
      public String toString(){
-        return  super.toString()+ "\nSalary:\t\t$" + getSalary();
+        return  super.toString()+ "\nSalary:\t\t$" + getPaymentAmount();
     }
     
      //accessor
     @Override
-    public double getSalary(){
+    public double getPaymentAmount(){
         return hour* hourlySalary;
     }
 

@@ -3,18 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+// 13200
 package Employees;
 
 import assignment1.Support;
 import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.year;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import ap.*;
+
 
 /**
  *
  * @author chaod
  */
-public abstract class Employee {
+public abstract class Employee implements Payable {
     private String fName,lName;
     private int age;
     private Date hireDate;
@@ -29,6 +32,7 @@ public abstract class Employee {
         this.age = age;
         Support.getEmpNum();       
     }
+   
     @Override
  public  String toString(){
      String employeeInfo = "";
@@ -53,7 +57,7 @@ public abstract class Employee {
         this.age = age;
     }
     //accessor
-    public abstract double getSalary();
+   
     public String getfName(){
         return fName;
     } 

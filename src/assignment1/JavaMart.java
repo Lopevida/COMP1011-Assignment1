@@ -8,6 +8,7 @@ package assignment1;
 import Employees.*;
 import Inventory.*;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -43,7 +44,7 @@ public class JavaMart {
      //*********************************************************************************************  
        
        boolean flag1=true,flag2,flag3;
-       int tempInt;
+       int tempInt = 0;
        String tempString;
 
        // teller start
@@ -55,7 +56,28 @@ public class JavaMart {
         System.out.println("Enter 1: Manage employees ");
         System.out.println("Enter 2: Manage products");
         System.out.println("Enter 0: EXIT");     
-        tempInt =Integer.parseInt(myScan.nextLine()) ;
+       // tempInt =Integer.parseInt(myScan.nextLine()) ;
+        
+        try{
+        tempString = myScan.nextLine();
+           if (tempString.matches("?\\d+(\\.\\d+)?")) {
+               tempInt = Integer.parseInt(tempString);
+           }
+           else{
+               throw new NumberFormatException();
+           }
+           System.out.println("test");
+           
+        }
+        catch(NumberFormatException|InputMismatchException error){
+            System.err.println("Error"+error.toString());
+        }
+        catch(Exception error){
+            System.err.println("Error"+error.toString());
+        }
+        finally{
+            // this code will always run
+        }
         switch(tempInt)
         {
           case 0:
@@ -69,7 +91,32 @@ public class JavaMart {
                 System.out.println("Enter 1: Add a new employee");
                 System.out.println("Enter 2: Search an existing employee");
                 System.out.println("Enter 0: Go back to menu");
-                 tempInt = Integer.parseInt(myScan.nextLine());
+                // add try catch block
+                
+                try  
+                {
+              //     tempInt = Integer.parseInt(myScan.nextLine());
+                    getInput();
+      
+                }
+                catch(NumberFormatException error){
+                    System.err.println("Error:" + error.getMessage());
+                    error.printStackTrace();
+                    StackTraceElement [] traceE = error.getStackTrace();
+                    for (StackTraceElement element:traceE) 
+                    {
+                        System.out.printf("%s\t",element.getClassName());
+                        System.out.printf("%s\t",element.getFileName());
+                        System.out.printf("%s\t",element.getLineNumber());
+                        System.out.printf("%s\t",element.getMethodName());
+                        
+                    }
+                    
+                }
+                catch(Exception error)
+                { 
+                    System.err.println("Error"+error.toString());
+                }
                 if (tempInt == 1)
                     {
                         // define some variables for storing input values.
@@ -364,5 +411,18 @@ public static boolean validator(int age,int year,int month,int day,double hour,d
          System.out.println("Must be a valid day");
     }
        return validator;
+   }
+   public static int getInput() throws InputMismatchException{
+       String tempInput;
+       Scanner read = new Scanner(System.in);
+       int input;      
+       tempInput = read.nextLine();
+            if (tempInput.matches("?\\d+(\\.\\d+)?")) {
+               input = Integer.parseInt(tempInput);
+           }
+           else{
+               throw new NumberFormatException();
+           }
+       return input;
    }
 }

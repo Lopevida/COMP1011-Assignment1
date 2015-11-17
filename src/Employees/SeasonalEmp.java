@@ -24,7 +24,7 @@ public class SeasonalEmp extends Employee {
      
          @Override
      public String toString(){
-        return  super.toString()+"\nBonus:\t\t"+getBonus()+"\nSalary:\t\t$" + getSalary();
+        return  super.toString()+"\nBonus:\t\t"+getBonus()+"\nSalary:\t\t$" + getPaymentAmount();
     }
      
      
@@ -40,7 +40,7 @@ public class SeasonalEmp extends Employee {
         return hourlySalary;
     }
     @Override
-    public double getSalary(){
+    public double getPaymentAmount(){
         return hourlySalary*hour+bonus;
     }
 

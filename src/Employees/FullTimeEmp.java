@@ -25,13 +25,13 @@ public class FullTimeEmp extends Employee {
  
     @Override
     public String toString(){
-        return  super.toString()+"\nBonus:\t\t"+getBonus()+"\nAllowance:\t\t"+getAllowance()+"\nSalary:\t\t$" + getSalary();
+        return  super.toString()+"\nBonus:\t\t"+getBonus()+"\nAllowance:\t\t"+getAllowance()+"\nSalary:\t\t$" + getPaymentAmount();
     }
     
     
       //accessor
        @Override
-    public double getSalary(){
+    public double getPaymentAmount(){
         return hour*hourlySalary+bonus+allowance;
     }
     public double getBonus(){
