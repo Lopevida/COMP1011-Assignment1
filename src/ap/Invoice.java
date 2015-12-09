@@ -1,9 +1,6 @@
 package ap;
 
-/**
- *
- * @author Tony
- */
+
 public class Invoice implements Payable
 {
     private final String partNumber, partDescription;
